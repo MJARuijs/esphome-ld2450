@@ -202,17 +202,17 @@ async def to_code(config):
         if region_config := config.get(f"region_{x}"):
             for i, coordinate in enumerate(NUMBERS):
                 coord_config = region_config[coordinate]
-                n = cg.new_Pvariable(coord_config[CONF_ID], x)
-                await number.register_number(
-                    n, coord_config, min_value=-1000, max_value=1000, step=1
-                )
-                await cg.register_parented(n, config[CONF_LD2450_ID])
-                cg.add(ld2450.set_region_number(x, i, n))
-                n = cg.new_Pvariable(
+                # n = cg.new_Pvariable(coord_config[CONF_ID], x)
+                # await number.register_number(
+                #     n, coord_config, min_value=-1000, max_value=1000, step=1
+                # )
+                # await cg.register_parented(n, config[CONF_LD2450_ID])
+                # cg.add(ld2450.set_region_number(x, i, n))
+                m = cg.new_Pvariable(
                     i,
-                    presence_region[CONF_X0],
-                    presence_region[CONF_Y0],
-                    presence_region[CONF_X1],
-                    presence_region[CONF_Y1]
+                    region_config[CONF_X0],
+                    region_config[CONF_Y0],
+                    region_config[CONF_X1],
+                    region_config[CONF_Y1]
                 )
-                cg.add(ld2450.add_presence_region(n))
+                cg.add(ld2450.add_presence_region(m))
