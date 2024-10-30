@@ -208,3 +208,11 @@ async def to_code(config):
                 )
                 await cg.register_parented(n, config[CONF_LD2450_ID])
                 cg.add(ld2450.set_region_number(x, i, n))
+                n = cg.new_Pvariable(
+                    i,
+                    presence_region[CONF_X0],
+                    presence_region[CONF_Y0],
+                    presence_region[CONF_X1],
+                    presence_region[CONF_Y1]
+                )
+                cg.add(ld2450.add_presence_region(n))
